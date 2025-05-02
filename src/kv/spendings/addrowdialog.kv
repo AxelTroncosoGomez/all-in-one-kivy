@@ -1,0 +1,43 @@
+#: import datetime datetime
+
+<AddRowDialog>
+    orientation: "vertical"
+    spacing: "0dp"
+    size_hint_y: None
+    height: "300dp"
+    width: "180dp"
+    select_date_id: select_date_id
+    select_store_id: select_store_id
+    select_product_id: select_product_id
+    select_amount_id: select_amount_id
+    select_price_id: select_price_id
+
+    # Probar si se pueden llamar directamente estos en `SpendingsScreen` class
+    MDTextField:
+        id: select_date_id
+        text: datetime.datetime.now().date().strftime("%d/%m/%Y")
+        helper_text: "Enter a valid date in format `dd/mm/yyyy`"
+        validator: "date"
+        date_format: "dd/mm/yyyy"
+        icon_left: "calendar-edit"
+
+    MDTextField:
+        id: select_store_id
+        helper_text: "Enter the name of the store"
+        icon_left: "store"
+
+    MDTextField:
+        id: select_product_id
+        helper_text: "Enter the name of the product"
+        icon_left: "cart"
+
+    MDTextField:
+        id: select_amount_id
+        text: "1"
+        helper_text: "Enter the number of items bought"
+        icon_left: "numeric"
+
+    MDTextField:
+        id: select_price_id
+        helper_text: "Enter the price of a single item"
+        icon_left: "currency-usd"

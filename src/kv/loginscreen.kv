@@ -1,0 +1,50 @@
+<LoginScreen>
+    email: email_field
+    password: password_field
+
+    MDCard:
+        size_hint: (0.7, 0.5)
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        GridLayout:
+            cols: 1
+            padding: [40, 40, 40, 40]
+            spaccing: [50, 50]
+            pos_hint: {"center_x": 0.5}
+
+            MDLabel:
+                text: "Welcome"
+                halign: "center"
+                font_style: "H5"
+                size_hint: (0.4, None)
+                pos_hint: {"center_x": 0.5}
+
+            MDTextField:
+                id: email_field
+                helper_text: "Please enter your username or email"
+                text: "admin"
+                normal_color: [0, 0, 0, 0.2]
+                active_color: [0, 0, 0, 0.2]
+                icon_type: "left"
+                left_icon: "account"
+                size_hint: (0.6, None)
+                pos_hint: {"center_x": 0.5}
+                hint_text: "Email"
+
+            MDTextField:
+                id: password_field
+                text: "admin"
+                helper_text: "Please enter yout password"
+                hint_text: "Password"
+                left_icon: "lock"
+                icon_type: "left"
+                password: True
+                size_hint: (0.6, None)
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Enter"
+                size_hint: (0.5, None)
+                pos_hint: {"center_x": 0.5}
+                on_release:
+                    root.check_credentials()

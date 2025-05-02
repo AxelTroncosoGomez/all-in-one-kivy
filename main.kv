@@ -1,0 +1,21 @@
+#: include src/kv/loginscreen.kv
+#: include src/kv/timerscreen.kv
+#: include src/kv/mainscreen.kv
+#: include src/kv/settingsscreen.kv
+
+MDScreenManager:
+    id: root_screen_manager
+    name: "root_screen_manager"
+
+    # Login View
+    LoginScreen:
+        parent_screen: root_screen_manager
+        name: "login_screen"
+
+    # Register View
+    # RegisterScreen:
+    #     name: "register_screen"
+
+    MainScreen:
+        parent_screen: root_screen_manager
+        name: "main_screen"      

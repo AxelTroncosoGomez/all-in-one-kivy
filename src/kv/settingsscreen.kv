@@ -1,0 +1,56 @@
+<SettingsScreen>:
+    settings_screen_manager: settings_screen_manager
+    on_enter:
+        root.top_appbar.opacity = 0
+        root.top_appbar.disabled = True
+    on_leave:
+        root.top_appbar.opacity = 1
+        root.top_appbar.disabled = False
+
+    MDScreenManager:
+        id: settings_screen_manager
+
+        MDScreen:
+            name: "settings_screen_main"
+
+            MDBoxLayout:
+                orientation: "vertical"
+
+                MDTopAppBar:
+                    type: "top"
+                    pos_hint: {"top": 1}
+                    title: "Settings"
+                    left_action_items: [["arrow-left", lambda _: root.go_back()]]
+                    elevation: 2
+
+                MDList:
+                    spacing: "10dp"
+
+                    OneLineIconListItem:
+                        text: "Theme"
+                        on_press: print("Theme pressed")
+                        IconLeftWidget:
+                            icon: "theme-light-dark"
+
+                    OneLineIconListItem:
+                        text: "Language"
+                        on_press: print("Language pressed")
+                        IconLeftWidget:
+                            icon: "translate"
+
+                    OneLineIconListItem:
+                        text: "Notifications"
+                        on_press: print("Notifications pressed")
+                        IconLeftWidget:
+                            icon: "bell-outline"
+
+                    OneLineIconListItem:
+                        text: "About"
+                        on_press: print("About pressed")
+                        IconLeftWidget:
+                            icon: "information-outline"
+                
+                MDWidget:
+                    
+
+                    

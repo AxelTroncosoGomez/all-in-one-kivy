@@ -1,0 +1,116 @@
+#:import datetime datetime
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+<DrawerContent>
+
+    MDList:
+        MDIconButton:
+            icon: "close"
+            pos_hint: {"right": 1}
+            on_press: root.nav_drawer.set_state("close")
+
+        MDNavigationDrawerHeader:
+            title: "Welcome user"
+            text: datetime.datetime.now().date().strftime("%d-%m-%Y")
+            spacing: "4dp"
+            padding: ("12dp", 0, 0, "40dp")
+        
+        MDNavigationDrawerDivider:
+
+        MDNavigationDrawerLabel:
+            text: "Views"
+            
+        MDNavigationDrawerItem:
+            text: "Home"
+            icon: "home"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+                root.screen_manager.transition = NoTransition()
+                root.screen_manager.current = self.text
+                root.top_appbar.title = self.text
+            
+        MDNavigationDrawerItem:
+            # Traer la logica de `kivy_example.py` este repo para
+            # implementar de manera local los spendings mensuales
+            # TODO: Agregar metricas dentro
+            text: "Spendings"
+            icon: "shopping"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+                root.screen_manager.transition = NoTransition()
+                root.screen_manager.current = self.text
+                root.top_appbar.title = self.text
+            
+        MDNavigationDrawerItem:
+            # Notas va a tener un FloatingSpeedDial con opciones
+            # Dentro de estas se va a encontrar las siguientes
+            # - Quick Note: Nota rapida que es la tipica
+            # - Thought: Pensamientos que tenga en el dia que quiera registrar
+            # - Action: Notas que requieren una accion, como una tarea de Trello
+            #           donde se ejecute un resultado, que tenga un proposito
+            # - Reminder: esta puede ser tanto un tipo de tarjeta como tambien
+            #              una opcion dentro de las demas notas que permite
+            #              recordar al usuario cada cierto periodo que tenga que retomar
+            #              el contenido de esta tarjeta
+            # - TODO: Tipo de tarjeta especial que tiene pasos para ser completada
+            #         De una nota rapida tambien se puede crear un TODO, pero hay un 
+            #         shortcut con esta opcion
+
+
+            # Cada Nota se puede ir mostrando (aun no se sabe como) como desplegables
+            # como una lista agrupada con buscado, pero aun no hay una idea clara
+            text: "Notes"
+            icon: "note-edit"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+                    
+        MDNavigationDrawerDivider:
+
+        MDNavigationDrawerLabel:
+            text: "Tools"
+        
+        MDNavigationDrawerItem:
+            # TODO: esta va a ser un bottom nav con 3 opciones
+            # Una sera Timer, otra es cronometro y la otra es Alarma
+            # Buscar si se puede hacer un Pop up de Timer cuando se minimiza
+            text: "Timer"
+            icon: "timer"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+                root.screen_manager.transition = NoTransition()
+                root.screen_manager.current = self.text
+                root.top_appbar.title = self.text
+
+        MDNavigationDrawerDivider:
+
+        MDNavigationDrawerLabel:
+            text: "Account"
+        
+        MDNavigationDrawerItem:
+            # Buscar vista generica de configuraciones de usuario para
+            # hacer un mockup generado
+            # Utilizar opciones de MDSwitch para activar cosas
+            # Tener tambien un boton de cambio de contraseña y de eliminacion de cuenta
+            text: "User"
+            icon: "account"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+        
+        MDNavigationDrawerItem:
+            # Congihurar la herramienta en si, tener un cambio de paleta primaria
+            # Tener un cambio de tema Light-Dark
+            # Buscar Mockup de Setting generico de aplicaciones para Utilizar
+            # Para rellenar se puede utilizar Faker
+            text: "Settings"
+            icon: "cog-outline"
+            text_color: "white"
+            on_press:
+                root.nav_drawer.set_state("close")
+                root.screen_manager.transition = NoTransition()
+                root.screen_manager.current = self.text
+                root.top_appbar.title = self.text

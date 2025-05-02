@@ -1,0 +1,162 @@
+#:import MDSwapTransition kivymd.uix.transition.MDSwapTransition
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+<TimerScreen>
+    hours: hours_field
+    minutes: minutes_field
+    seconds: seconds_field
+    timer: timer_text
+    timer_screen_manager: timer_screen_manager
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDScreenManager:
+            id: timer_screen_manager
+
+            MDScreen:
+                name: "timer_screen_main"
+
+                GridLayout:
+                    cols: 1
+                    size_hint: (0.9, 0.4)
+                    pos_hint: {"center_x": 0.5, "top": 0.8}
+                    spacing: [50, 50]
+                    paddings: [40, 40, 40, 40]
+
+                    GridLayout:
+                        cols: 3
+
+                        # First row
+                        MDLabel:
+                            text: "Hours"
+                            halign: "center"
+                            size_hint_y: None
+                            height: 200
+
+                        MDLabel:
+                            text: "Minutes"
+                            halign: "center"
+                            size_hint_y: None
+                            height: 200
+
+                        MDLabel:
+                            text: "Seconds"
+                            halign: "center"
+                            size_hint_y: None
+                            height: 200
+
+                        # Second row
+                        MDTextField:
+                            id: hours_field
+                            mode: "round"
+                            text: "00"
+                            halign: "center"
+                            text_align: "center"
+
+                        MDTextField:
+                            id: minutes_field
+                            mode: "round"
+                            text: "00"
+                            halign: "center"
+                            text_align: "center"
+
+                        MDTextField:
+                            id: seconds_field
+                            mode: "round"
+                            text: "00"
+                            halign: "center"
+                            text_align: "center"
+
+                        MDLabel:
+
+                        MDFillRoundFlatButton:
+                            text: "Start"
+                            size_hint: (0.5, None)
+                            pos_hint: {"center_x": 0.5}
+                            on_release:
+                                timer_screen_manager.transition = NoTransition()
+                                # timer_screen_manager.transition.direction = 'up'
+                                timer_screen_manager.current = "timer_screen_start"
+                                root.set_timer()
+                                root.start_timer()
+
+            MDScreen:
+                name: "timer_screen_start"
+                on_enter:
+                    root.top_appbar.opacity: 0
+                    root.top_appbar.disabled: True
+                on_leave:
+                    root.top_appbar.opacity: 1
+                    root.top_appbar.disabled: False
+
+                MDTopAppBar:
+                    type: "top"
+                    pos_hint: {"top": 1}
+                    title: "Timer"
+                    anchor_title: "left"
+                    type_height: "small"
+                    left_action_items: [["arrow-left", lambda _: root.navigate_to_main()]]
+
+                GridLayout:
+                    cols: 1
+                    size_hint: (0.9, 0.4)
+                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    paddings: [40, 40, 40, 40]
+                    spacing: [60, 60]
+
+                    Label:
+                        id: timer_text
+                        text: "00:00:10"
+                        font_family: 'Verdana'
+                        font_size: 80
+                        pos_hint: {"center_x": 0.5}
+                        halign: "center"
+                        size_hint_y: None
+
+                    GridLayout:
+                        cols: 2
+                        size_hint: (0.9, None)
+                        spacing: [30, 30]
+
+                        MDRaisedButton:
+                            text: "Resumen"
+                            size_hint: (0.5, None)
+                            bold: True
+                            background_color: '#00FFCE'
+                            on_press: 
+                                root.resume_timer()
+
+                        MDRaisedButton:
+                            id: timer_status_btn
+                            text: "Pause"
+                            size_hint: (0.5, None)
+                            bold: True
+                            background_color: '#00FFCE'
+                            on_press:
+                                root.pause_timer()
+            
+            MDScreen:
+                name: "alarm_screen_main"
+
+                MDLabel:
+                    text: "Random"
+                    halign: "center"
+
+        MDBottomNavigation:
+            size_hint: (1, 0.1)
+
+            MDBottomNavigationItem:
+                icon: "timer"
+                text: "Timer"
+                on_tab_press:
+                    timer_screen_manager.transition = NoTransition()
+                    timer_screen_manager.current = "timer_screen_main"
+
+            MDBottomNavigationItem:
+                icon: "alarm"
+                text: "Alarm"
+                on_tab_press:
+                    timer_screen_manager.transition = NoTransition()
+                    timer_screen_manager.current = "alarm_screen_main"

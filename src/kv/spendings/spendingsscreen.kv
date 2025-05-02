@@ -1,0 +1,30 @@
+#: include src/kv/spendings/addrowdialog.kv
+#: include src/kv/spendings/addrowbutton.kv
+#:import MDDataTable kivymd.uix.datatables.MDDataTable
+#:import Factory kivy.factory.Factory
+
+<SpendingsScreen>
+    spendings_screen_manager: spendings_screen_manager
+    content_spendings_screen: content_spendings_screen
+    add_row_button: add_row_button
+    db: app.my_database
+
+    MDScreenManager:
+        id: spendings_screen_manager
+        name: "spendings_screen_manager"
+
+        MDScreen:
+            id: main_spendings_screen
+            name: "main_spendings_screen"
+
+            # Widget no centralizado
+            # How to add color to some words on VScode
+            MDBoxLayout:
+                id: content_spendings_screen
+                size_hint: (1, 0.9)
+            
+            AddRowButton:
+                id: add_row_button
+                name: "add_row_button"
+                datatable_container: content_spendings_screen
+                db: app.my_database

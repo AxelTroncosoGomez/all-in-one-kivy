@@ -1,0 +1,56 @@
+#: include src/kv/appbar.kv
+#: include src/kv/timerscreen.kv
+#: include src/kv/drawercontent.kv
+#: include src/kv/homescreen.kv
+#: include src/kv/spendings/spendingsscreen.kv
+#: include src/kv/settingsscreen.kv
+
+<MainScreen>
+    home_screen: home_screen
+    timer_screen: timer_screen
+    spendings_screen: spendings_screen
+    settings_screen: settings_screen
+
+    CustomAppBar:
+        id: top_appbar
+        name: "top_appbar"
+        nav_drawer: nav_drawer
+
+    MDNavigationLayout:
+        id: nav_layout
+        name: "nav_layout"
+
+        MDScreenManager:
+            id: screen_manager
+            name: "screen_manager"
+
+            HomeScreen:
+                id: home_screen
+                name: "Home"
+                top_appbar: top_appbar
+                
+            TimerScreen:
+                id: timer_screen
+                name: "Timer"
+                top_appbar: top_appbar
+                
+            SpendingsScreen:
+                id: spendings_screen
+                name: "Spendings"
+                top_appbar: top_appbar
+                
+            SettingsScreen:
+                id: settings_screen
+                name: "Settings"
+                top_appbar: top_appbar
+                parent_screen: root.parent_screen
+        
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: (0, 8, 8, 0)
+            anchor: "left"
+
+            DrawerContent:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+                top_appbar: top_appbar
